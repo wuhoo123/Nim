@@ -31,8 +31,8 @@ public class Player {
     public int getScore(){
         return score;
     }
-    public void CPU(){
-    
+    public void dumbCPU(){
+        name = "dumbCPU";
     }
 }
 

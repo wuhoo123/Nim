@@ -8,13 +8,14 @@ public class Game {
     private Player p1 = new Player();
     private Player p2 = new Player();
     private boolean gameOver = false;
+    private boolean computer = false;
     private int starting = 0;
     private int pileSize = 20;
     
     // Constructor
     public Game() {
         start();
-        pileSize = Board.populate();
+        pileSize = Board.getPileSize();
         play();
         
     }
@@ -23,16 +24,14 @@ public class Game {
         if (player == 1){
             System.out.println(p1.getName() + " wins");
             p1.addScore();
-            System.out.println(p1.getName() + " has won " + p1.getScore() + " times");
-            System.out.println(p2.getName() + " has won " + p2.getScore() + " times");
         }
         else {
             System.out.println(p2.getName() + " wins");
             p2.addScore();
-            System.out.println(p2.getName() + " has won " + p2.getScore() + " times");
-            System.out.println(p1.getName() + " has won " + p1.getScore() + " times");
         }
-
+        System.out.println(p1.getName() + " has won " + p1.getScore() + " time(s)");
+        System.out.println(p2.getName() + " has won " + p2.getScore() + " time(s)");
+        
         System.out.println("Do you guys want to replay? (Y/N)");
         String in = scan.nextLine();
         in = in.toUpperCase();
@@ -44,8 +43,12 @@ public class Game {
             gameOver = true;
         }
     }
+    
     // While loop that runs the game until the pilesize is 0 and the player no longer wants to play anymore. Main loop
     public void play() {
+        System.out.println("Welcome to the game of Nim. Nim is a game of strategy where either yourself and a player or a computer take turns taking sticks away from a pile. "+ 
+        "The goal of the game is to be the last person to pickup a stick. Follow the instructions diplayed on the terminal as you play. Commands from the terminal will include: " + 
+        "Choose an amount of sticks to remove");
         goFirst();
         while (pileSize > 0 && gameOver == false){
             // Player 1 Moves
@@ -55,8 +58,14 @@ public class Game {
             } 
             // Player 2 Moves
             else {
-                System.out.println(p2.getName() + " choose an amount of sticks to remove");
-                removePieces(sn.nextInt(), starting);
+                if (computer) {
+                    
+                }
+                else {
+                    System.out.println(p2.getName() + " choose an amount of sticks to remove");
+                    removePieces(sn.nextInt(), starting);
+                }
+
             }
 
         }
@@ -76,7 +85,7 @@ public class Game {
 
     // Remove pieces from pile based on user input and show error message if number is invalid.
     public void removePieces(int num, int player){
-        if (num <= (Board.getPileSize() / 2)){
+        if ((num <= (pileSize / 2)) && num > 0){
             pileSize -= num;
             if (pileSize == 0) {
                 Winner(player);
@@ -108,8 +117,31 @@ public class Game {
     private void start() {
         System.out.println("Player 1 enter your name:");
         p1.setName(scan.nextLine());
-        System.out.println("Player 2 enter your name:");
-        p2.setName(scan.nextLine());
+        if (playerOrComputer()) {
+            p2.dumbCPU();
+        } 
+        else {
+            System.out.println("Player 2 enter your name:");
+            p2.setName(scan.nextLine());
+        }
+
+    }
+
+    private boolean playerOrComputer() {
+        System.out.println("Do you want to play against a player or a computer (P/C)");
+        String input = scan.nextLine().toUpperCase();
+        if (input.equals("P")){
+            return false;
+        } 
+        else if (input.equals("C")) {
+            computer = true;
+            return true;
+        }
+        else {
+            System.out.println("Invalid input try again!");
+            playerOrComputer();
+        }
+        return false;
     }
 
 }
