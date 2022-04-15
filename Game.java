@@ -9,11 +9,15 @@ public class Game {
     private Player p2 = new Player();
     private boolean gameOver = false;
     private boolean computer = false;
+    private boolean autoPlay = false;
     private int starting = 0;
     private int pileSize = 20;
     
     // Constructor
     public Game() {
+        System.out.println("Welcome to the game of Nim. Nim is a game of strategy where either yourself and a player or a computer take turns taking sticks away from a pile. "+ 
+        "The goal of the game is to be the last person to pickup a stick. Follow the instructions diplayed on the terminal as you play. Commands from the terminal will include: " + 
+        "Choose an amount of sticks to remove, Choose too many pieces, please try again");
         start();
         pileSize = Board.getPileSize();
         play();
@@ -35,20 +39,25 @@ public class Game {
         System.out.println("Do you guys want to replay? (Y/N)");
         String in = scan.nextLine();
         in = in.toUpperCase();
-        if (in.equals("Y")){
+        if (autoPlay){
+            System.out.println("Autoplaying....");
+            pileSize = Board.populate();
+            play();
+        }
+        else if (in.equals("Y")){
             pileSize = Board.populate();
             play();
         } else if (in.equals("N")) {
             System.out.println("Thank you for playing");
             gameOver = true;
+        }else {
+            System.out.println("Invalid input ");
+            Winner(player);
         }
     }
     
     // While loop that runs the game until the pilesize is 0 and the player no longer wants to play anymore. Main loop
     public void play() {
-        System.out.println("Welcome to the game of Nim. Nim is a game of strategy where either yourself and a player or a computer take turns taking sticks away from a pile. "+ 
-        "The goal of the game is to be the last person to pickup a stick. Follow the instructions diplayed on the terminal as you play. Commands from the terminal will include: " + 
-        "Choose an amount of sticks to remove, Choose too many pieces, please try again");
         goFirst();
         while (pileSize > 0 && gameOver == false){
             // Player 1 Moves
@@ -140,8 +149,17 @@ public class Game {
             return false;
         } 
         else if (input.equals("C")) {
-            computer = true;
-            return true;
+            System.out.println("Do you want to turn on Autoplay");
+            String auto = scan.nextLine().toUpperCase();
+            if (auto.equals("Y")){
+                autoPlay = true;
+                computer = true;
+                return true;
+            }
+            else if (auto.equals("N")){
+                computer = true;
+                return true;
+            }
         }
         else {
             System.out.println("Invalid input try again!");
