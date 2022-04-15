@@ -32,9 +32,11 @@ public class Player {
     public int getScore(){
         return score;
     }
+    // Creates the new dumbPU Player object.
     public void dumbCPU(){
         name = "dumbCPU";
     }
+    // dumbCPU makes his move.
     public int dumbCPUMove(int pileSize){
         int pieces = 0;
         
@@ -45,6 +47,14 @@ public class Player {
             pieces = 1;
         }
         return pieces;
+    }
+    // Creates the new smartCPU
+    public void smartCPU(){
+        name = "smartCPU";
+    }
+    // smartCPU makes its move.
+    public void smartCPUMove(){
+
     }
 }
 
