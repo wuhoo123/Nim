@@ -1,8 +1,9 @@
+import java.util.Random;
 public class Player {
     private int pile = 0;
     private String name = "";
     private int score = 0;
-    
+    Random rand = new Random();
     // Sets the name of the player
     public void setName(String playerName){
         name = playerName;
@@ -33,6 +34,17 @@ public class Player {
     }
     public void dumbCPU(){
         name = "dumbCPU";
+    }
+    public int dumbCPUMove(int pileSize){
+        int pieces = 0;
+        
+        if (pileSize / 2 > 1){
+            pieces = rand.nextInt(1, pileSize / 2);
+        }
+        else{
+            pieces = 1;
+        }
+        return pieces;
     }
 }
 

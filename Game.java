@@ -31,7 +31,7 @@ public class Game {
         }
         System.out.println(p1.getName() + " has won " + p1.getScore() + " time(s)");
         System.out.println(p2.getName() + " has won " + p2.getScore() + " time(s)");
-        
+        // Receive user input to decide if they want to play again
         System.out.println("Do you guys want to replay? (Y/N)");
         String in = scan.nextLine();
         in = in.toUpperCase();
@@ -48,7 +48,7 @@ public class Game {
     public void play() {
         System.out.println("Welcome to the game of Nim. Nim is a game of strategy where either yourself and a player or a computer take turns taking sticks away from a pile. "+ 
         "The goal of the game is to be the last person to pickup a stick. Follow the instructions diplayed on the terminal as you play. Commands from the terminal will include: " + 
-        "Choose an amount of sticks to remove");
+        "Choose an amount of sticks to remove, Choose too many pieces, please try again");
         goFirst();
         while (pileSize > 0 && gameOver == false){
             // Player 1 Moves
@@ -58,11 +58,11 @@ public class Game {
             } 
             // Player 2 Moves
             else {
+                System.out.println(p2.getName() + " choose an amount of sticks to remove");
                 if (computer) {
-                    
+                    removePieces(p2.dumbCPUMove(pileSize), starting);
                 }
                 else {
-                    System.out.println(p2.getName() + " choose an amount of sticks to remove");
                     removePieces(sn.nextInt(), starting);
                 }
 
@@ -101,6 +101,12 @@ public class Game {
                 displayBoard();
             }
         }
+        else if (pileSize == 1 && num == 1){
+            pileSize -= num;
+            Winner(player);
+        }
+            
+
         else{
             System.out.println("Choose too many pieces, please try again");
             removePieces(sn.nextInt(), player);
@@ -126,7 +132,7 @@ public class Game {
         }
 
     }
-
+    // Loop to recieve player input to decide whether they want to play against another player or a computer
     private boolean playerOrComputer() {
         System.out.println("Do you want to play against a player or a computer (P/C)");
         String input = scan.nextLine().toUpperCase();
