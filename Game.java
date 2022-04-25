@@ -15,8 +15,8 @@ public class Game {
     
     // Constructor
     public Game() {
-        System.out.println("Welcome to the game of Nim. \n Nim is a game of strategy where either yourself and a player or a computer take turns taking sticks away from a pile. \n"+ 
-        "The goal of the game is to be the last person to pickup a stick. \n Follow the instructions diplayed on the terminal as you play. \nCommands from the terminal will include: " + 
+        System.out.println("Welcome to the game of Nim. \nNim is a game of strategy where either yourself and a player or a computer take turns taking sticks away from a pile. \n"+ 
+        "The goal of the game is to be the last person to pickup a stick. \nFollow the instructions diplayed on the terminal as you play. \nCommands from the terminal will include: " + 
         "Choose an amount of sticks to remove, Choose too many pieces, please try again");
         start();
         pileSize = Board.getPileSize();
