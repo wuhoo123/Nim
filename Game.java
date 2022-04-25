@@ -35,24 +35,26 @@ public class Game {
         }
         System.out.println(p1.getName() + " has won " + p1.getScore() + " time(s)");
         System.out.println(p2.getName() + " has won " + p2.getScore() + " time(s)");
-        // Receive user input to decide if they want to play again
-        System.out.println("Do you guys want to replay? (Y/N)");
-        String in = scan.nextLine();
-        in = in.toUpperCase();
+
         if (autoPlay){
             System.out.println("Autoplaying....");
             pileSize = Board.populate();
             play();
-        }
-        else if (in.equals("Y")){
-            pileSize = Board.populate();
-            play();
-        } else if (in.equals("N")) {
-            System.out.println("Thank you for playing");
-            gameOver = true;
-        }else {
-            System.out.println("Invalid input ");
-            Winner(player);
+        } else {
+            // Receive user input to decide if they want to play again
+            System.out.println("Do you guys want to replay? (Y/N)");
+            String in = scan.nextLine();
+            in = in.toUpperCase();
+            if (in.equals("Y")){
+                pileSize = Board.populate();
+                play();
+            } else if (in.equals("N")) {
+                System.out.println("Thank you for playing!");
+                gameOver = true;
+            }else {
+                System.out.println("Invalid input ");
+                Winner(player);
+            }
         }
     }
     
@@ -125,7 +127,7 @@ public class Game {
     public void displayBoard() {
         System.out.println("There are " + pileSize + " sticks left in the pile");
         System.out.println(p1.getName() + " has " + p1.getPile() + " sticks");
-        System.out.println(p2.getName() + " has " + p2.getPile() + " sticks");
+        System.out.println(p2.getName() + " has " + p2.getPile() + " sticks \n");
     }
 
     // Enter in names - begin the game.

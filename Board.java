@@ -6,7 +6,7 @@ public class Board {
 
     // Chooses a random number to populate the board.
     public static int populate() {
-        pile = rand.nextInt(20, 51);
+        pile = rand.nextInt(10, 51);
         System.out.println("The pile has " + pile + " pieces");
         return pile;
     }
