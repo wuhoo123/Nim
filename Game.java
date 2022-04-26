@@ -12,6 +12,10 @@ public class Game {
     private boolean autoPlay = false;
     private int starting = 0;
     private int pileSize = 20;
+    final String YELLOW_COLOR = "\u001B[33m";
+    final String GREEN_COLOR = "\u001B[32m";
+    final String RED_COLOR = "\u001B[31m";
+    final String RESET = "\u001B[0m";
     
     // Constructor
     public Game() {
@@ -26,11 +30,11 @@ public class Game {
     // Select the winner and display scores
     public void Winner(int player){
         if (player == 1){
-            System.out.println(p1.getName() + " wins");
+            System.out.println(GREEN_COLOR + p1.getName() + RESET + " wins");
             p1.addScore();
         }
         else {
-            System.out.println(p2.getName() + " wins");
+            System.out.println(GREEN_COLOR + p2.getName() + RESET + " wins");
             p2.addScore();
         }
         System.out.println(p1.getName() + " has won " + p1.getScore() + " time(s)");
@@ -74,6 +78,7 @@ public class Game {
                     removePieces(p2.dumbCPUMove(pileSize), starting);
                 }
                 else {
+                    int piece = parseInput();
                     removePieces(sn.nextInt(), starting);
                 }
 
@@ -93,6 +98,10 @@ public class Game {
             starting = 2;
         }
     }
+
+    // public int parseInput(){
+    //     sn.hasNextInt();
+    // }
 
     // Remove pieces from pile based on user input and show error message if number is invalid.
     public void removePieces(int num, int player){
