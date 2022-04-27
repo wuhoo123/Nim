@@ -78,7 +78,7 @@ public class Game {
                     removePieces(p2.dumbCPUMove(pileSize), starting);
                 }
                 else {
-                    int piece = parseInput();
+                    // int piece = parseInput();
                     removePieces(sn.nextInt(), starting);
                 }
 
