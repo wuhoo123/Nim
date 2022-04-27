@@ -25,21 +25,10 @@ public class Game {
         start();
         pileSize = Board.getPileSize();
         play();
-        
     }
+
     // Select the winner and display scores
     public void Winner(int player){
-        if (player == 1){
-            System.out.println(GREEN_COLOR + p1.getName() + RESET + " wins");
-            p1.addScore();
-        }
-        else {
-            System.out.println(GREEN_COLOR + p2.getName() + RESET + " wins");
-            p2.addScore();
-        }
-        System.out.println(p1.getName() + " has won " + p1.getScore() + " time(s)");
-        System.out.println(p2.getName() + " has won " + p2.getScore() + " time(s)");
-
         if (autoPlay){
             System.out.println("Autoplaying....");
             pileSize = Board.populate();
@@ -60,48 +49,67 @@ public class Game {
                 Winner(player);
             }
         }
+
+        if (player == 1){
+            System.out.println(GREEN_COLOR + p1.getName() + RESET + " wins");
+            p1.addScore();
+        }
+        else {
+            System.out.println(RED_COLOR + p2.getName() + RESET + " wins");
+            p2.addScore();
+        }
+        System.out.println(GREEN_COLOR + p1.getName() + RESET + " has won " + p1.getScore() + " time(s)");
+        System.out.println(RED_COLOR + p2.getName() + RESET + " has won " + p2.getScore() + " time(s)");
     }
     
     // While loop that runs the game until the pilesize is 0 and the player no longer wants to play anymore. Main loop
     public void play() {
         goFirst();
+        int number;
         while (pileSize > 0 && gameOver == false){
             // Player 1 Moves
             if (starting == 1) {
-                System.out.println(p1.getName() + " choose an amount of sticks to remove");
-                removePieces(sn.nextInt(), starting);
+                System.out.println(GREEN_COLOR + p1.getName() + RESET + " choose an amount of sticks to remove");
+                number = parseIntInput();
+                removePieces(number, starting);
             } 
             // Player 2 Moves
             else {
-                System.out.println(p2.getName() + " choose an amount of sticks to remove");
+                System.out.println(RED_COLOR + p2.getName() + RESET + " choose an amount of sticks to remove");
                 if (computer) {
                     removePieces(p2.dumbCPUMove(pileSize), starting);
                 }
                 else {
-                    // int piece = parseInput();
-                    removePieces(sn.nextInt(), starting);
-                }
+                    number = parseIntInput();
+                    removePieces(number, starting);                }
 
             }
 
         }
 
     }
+
     // Select who gets the first turn of the game.
     public void goFirst() {
         int start = rand.nextInt(0, 2);
         if (start == 1){
-            System.out.println(p1.getName() + " goes first");
+            System.out.println(GREEN_COLOR + p1.getName() + RESET + " goes first");
             starting = 1;
         } else {
-            System.out.println(p2.getName() + " goes first");
+            System.out.println(RED_COLOR + p2.getName() + RESET + " goes first");
             starting = 2;
         }
     }
 
-    // public int parseInput(){
-    //     sn.hasNextInt();
-    // }
+    public int parseIntInput() {
+        int number;            
+        while (!sn.hasNextInt()) {
+            System.out.println("That's not a number!");
+            sn.next();
+        }
+        number = sn.nextInt();
+        return number;
+    }
 
     // Remove pieces from pile based on user input and show error message if number is invalid.
     public void removePieces(int num, int player){
@@ -135,8 +143,8 @@ public class Game {
     // Show pile size and amount of sticks in each players pile.
     public void displayBoard() {
         System.out.println("There are " + pileSize + " sticks left in the pile");
-        System.out.println(p1.getName() + " has " + p1.getPile() + " sticks");
-        System.out.println(p2.getName() + " has " + p2.getPile() + " sticks \n");
+        System.out.println(GREEN_COLOR + p1.getName() + RESET + " has " + p1.getPile() + " sticks");
+        System.out.println(RED_COLOR + p2.getName() + RESET + " has " + p2.getPile() + " sticks \n");
     }
 
     // Enter in names - begin the game.
@@ -176,7 +184,7 @@ public class Game {
             else{
                 System.out.println("Invalid input try again");
                     playerOrComputer();  
-                }
+            }
         }
         else{
             System.out.println("Invalid input try again!");
