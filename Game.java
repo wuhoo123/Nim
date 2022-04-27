@@ -133,16 +133,15 @@ public class Game {
             pileSize -= num;
             Winner(player);
         }
-            
-
         else{
             System.out.println("Choose too many pieces, please try again");
-            removePieces(sn.nextInt(), player);
+            int number = parseIntInput();
+            removePieces(number, player);
         }
     }
     // Show pile size and amount of sticks in each players pile.
     public void displayBoard() {
-        System.out.println("There are " + pileSize + " sticks left in the pile");
+        System.out.println("\nThere are " + pileSize + " sticks left in the pile");
         System.out.println(GREEN_COLOR + p1.getName() + RESET + " has " + p1.getPile() + " sticks");
         System.out.println(RED_COLOR + p2.getName() + RESET + " has " + p2.getPile() + " sticks \n");
     }
