@@ -29,6 +29,18 @@ public class Game {
 
     // Select the winner and display scores
     public void Winner(int player){
+        if (player == 1){
+            System.out.println(GREEN_COLOR + p1.getName() + RESET + " wins");
+            p1.addScore();
+        }
+        else {
+            System.out.println(RED_COLOR + p2.getName() + RESET + " wins");
+            p2.addScore();
+        }
+        
+        System.out.println(GREEN_COLOR + p1.getName() + RESET + " has won " + p1.getScore() + " time(s)");
+        System.out.println(RED_COLOR + p2.getName() + RESET + " has won " + p2.getScore() + " time(s)");
+
         if (autoPlay){
             System.out.println("Autoplaying....");
             pileSize = Board.populate();
@@ -50,16 +62,6 @@ public class Game {
             }
         }
 
-        if (player == 1){
-            System.out.println(GREEN_COLOR + p1.getName() + RESET + " wins");
-            p1.addScore();
-        }
-        else {
-            System.out.println(RED_COLOR + p2.getName() + RESET + " wins");
-            p2.addScore();
-        }
-        System.out.println(GREEN_COLOR + p1.getName() + RESET + " has won " + p1.getScore() + " time(s)");
-        System.out.println(RED_COLOR + p2.getName() + RESET + " has won " + p2.getScore() + " time(s)");
     }
     
     // While loop that runs the game until the pilesize is 0 and the player no longer wants to play anymore. Main loop
