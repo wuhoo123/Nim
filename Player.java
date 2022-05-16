@@ -42,7 +42,7 @@ public class Player {
         int pieces = 0;
         pileSize /= 2;
         
-        if (pileSize / 2 > 1){
+        if (pileSize > 1){
             pieces = rand.nextInt(((pileSize) - 1 + 1)) + 1;
         }
         else{

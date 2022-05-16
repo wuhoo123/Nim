@@ -93,7 +93,7 @@ public class Game {
 
     // Select who gets the first turn of the game.
     public void goFirst() {
-        int start = rand.nextInt(0, 2);
+        int start = rand.nextInt(2);
         if (start == 1){
             System.out.println(GREEN_COLOR + p1.getName() + RESET + " goes first");
             starting = 1;
