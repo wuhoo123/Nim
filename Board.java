@@ -10,6 +10,7 @@ public class Board {
         System.out.println("The pile has " + pile + " pieces");
         return pile;
     }
+    
     // Reduces the pile size based on the parameter passed in.
     public static void reducePileSize(int num){
         pile -= num;
