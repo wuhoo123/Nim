@@ -6,11 +6,11 @@ public class Board {
 
     // Chooses a random number to populate the board.
     public static int populate() {
-        pile = rand.nextInt(10, 51);
+        pile = rand.nextInt(51 - 10 + 1) + 10;
         System.out.println("The pile has " + pile + " pieces");
         return pile;
     }
-    
+
     // Reduces the pile size based on the parameter passed in.
     public static void reducePileSize(int num){
         pile -= num;

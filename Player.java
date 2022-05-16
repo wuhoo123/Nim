@@ -1,4 +1,5 @@
 import java.util.Random;
+
 public class Player {
     private int pile = 0;
     private String name = "";
@@ -39,9 +40,10 @@ public class Player {
     // dumbCPU makes his move.
     public int dumbCPUMove(int pileSize){
         int pieces = 0;
+        pileSize /= 2;
         
         if (pileSize / 2 > 1){
-            pieces = rand.nextInt(1, pileSize / 2);
+            pieces = rand.nextInt(((pileSize) - 1 + 1)) + 1;
         }
         else{
             pieces = 1;
